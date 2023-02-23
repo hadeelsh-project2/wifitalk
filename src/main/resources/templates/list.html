@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List Rule</title>
+<link rel="stylesheet" href="css/view.css">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<b>WI-FI TALK</b>
+		</div>
+
+		<input type="checkbox" id="btn" hidden>
+		<nav>
+			<!-- display none -->
+			<div class="logo">
+				<b>WI-FI TALK</b>
+			</div>
+
+			<ul>
+				<li sec:authorize="isAuthenticated()">
+					<form action="#" method="POST" th:action="@{/logout}">
+
+						<button type="submit" name="submit" class="logout">Logout</button>
+					</form>
+				</li>
+				<li><a href="#" th:href="@{/login}"
+					sec:authorize="!isAuthenticated()">Sign in</a></li>
+						<li><a href="#" th:href="@{/}"  sec:authorize="isAuthenticated()" >Status</a></li>
+				<li><a href="#" th:href="@{/rules}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}" class="active">List Rule</a></li>
+                <li><a href="#" th:href="@{/records}" sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">Traffic Monitoring</a></li>
+                   <li><a href="#" th:href="@{/devices}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'NON_TECH'}">Devices</a></li>
+				<!--  <li><a href="check.html">Check Records</a></li> -->
+				<li><a href="#" th:href="@{/about}">About Us</a></li>
+			</ul>
+		</nav>
+		<label for="btn" class="btn">
+			<div></div>
+			<div></div>
+			<div></div>
+
+
+		</label>
+	</header>
+
+
+	<div class="view">
+
+
+
+		<div class="head">On the page, you can see the details of the snort rules used on this network.</div>
+
+	</div>
+	<table id="customers">
+		<tr>
+			<th>Rule ID</th>
+			<th>Rule Desc</th>
+			<th>Rule Code</th>
+
+
+
+		</tr>
+
+		<tr th:each="rule : ${rules}">
+			<td th:text="${rule.id}"></td>
+			<td th:text="${rule.desc}"></td>
+			<td th:text="${rule.code}"></td>
+
+		</tr>
+
+
+
+
+
+	</table>
+	<br>
+
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Status</title>
+<link rel="stylesheet" href="css/view.css">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<b>WI-FI TALK</b>
+		</div>
+
+		<input type="checkbox" id="btn" hidden>
+		<nav>
+			<!-- display none -->
+			<div class="logo">
+				<b>WI-FI TALK</b>
+			</div>
+
+			<ul>
+				<li sec:authorize="isAuthenticated()">
+					<form action="#" method="POST" th:action="@{/logout}">
+
+						<button type="submit" name="submit" class="logout">Logout</button>
+					</form>
+				</li>
+				<li><a href="#" th:href="@{/login}"
+					sec:authorize="!isAuthenticated()">Sign in</a></li>
+					<li><a href="#" th:href="@{/}"  sec:authorize="isAuthenticated()" class="active">Status</a></li>
+				<li><a href="#" th:href="@{/rules}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">List Rule</a></li>
+                <li><a href="#" th:href="@{/records}" sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">Traffic Monitoring</a></li>
+                   <li><a href="#" th:href="@{/devices}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'NON_TECH'}">Devices</a></li>
+	
+				<li><a href="#" th:href="@{/about}">About Us</a></li>
+			</ul>
+		</nav>
+		<label for="btn" class="btn">
+			<div></div>
+			<div></div>
+			<div></div>
+
+
+		</label>
+	</header>
+
+
+	<div class="view">
+
+
+
+		<div class="head">Network Info </div>
+
+	</div>
+	<div>
+	  <table id="customers">
+	  	<tbody>
+	  		<tr>
+	  			<td>Network Interface : </td>
+	  			<td><span th:text="${netface}"></span></td>
+	  		</tr>
+	  		<tr>
+	  			<td>SSID: </td>
+	  			<td><span th:text="${ssid}"></span></td>
+	  		</tr>
+	  
+	  	
+	  
+	  		<tr>
+	  			<td>Connected Devices:</td>
+	  			<td><span th:text="${upCount}"></span></td>
+	  		</tr>
+			<tr>
+				<td>Network Address:</td>
+				<td><span th:text="${netaddr}"></span></td>
+			</tr>
+	  
+	  	</tbody>
+	  </table>
+		<div class="view">
+		<div style="text-align:center;margin-top:2%;margin-bottom:2%;">
+                    <p> View information as: </p><br>
+	  	<a href="#" th:href="@{/userType/TECH}" class="tech-btn" >TECHNICNAL</a> | 
+	  	<a href="#" th:href="@{/userType/NON_TECH}" class="tech-btn" >NON TECHNICNAL</a> 
+	  </div>
+	<!--    <hr>
+	  <h3>Connected Devices Summary: </h3>
+		<hr>
+		</div>
+		  <table id="customers">
+        <tr>
+            <th>Device#</th>
+            <th>IP</th>
+            <th>Status</th>
+            
+    
+
+        </tr>
+
+        <tr th:each="device : ${devices}">
+            <td th:text="${device.id}" th:style="${device.status == 'UP' ? 'color:green' : 'color:red'}"></td>
+            <td th:text="${device.ip}" th:style="${device.status == 'UP' ? 'color:green' : 'color:red'}"></td>
+            <td th:text="${device.status}" th:style="${device.status == 'UP' ? 'color:green' : 'color:red'}"></td>
+    
+        </tr>
+       
+    
+
+
+
+    </table>-->
+	</div>
+	
+	<br>
+
+
+</body>
+</html>

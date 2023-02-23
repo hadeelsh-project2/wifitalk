@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Records</title>
+<link rel="stylesheet" href="css/view.css">
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<b>WI-FI TALK</b>
+		</div>
+
+		<input type="checkbox" id="btn" hidden>
+		<nav>
+			<!-- display none -->
+			<div class="logo">
+				<b>WI-FI TALK</b>
+			</div>
+
+			<ul>
+				<li>
+				<li sec:authorize="isAuthenticated()">
+					<form action="#" method="POST" th:action="@{/logout}">
+
+						<button type="submit" name="submit" class="logout">Logout</button>
+					</form>
+				</li>
+				<a href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()">Sign
+					in</a>
+				</li>
+				<li><a href="#" th:href="@{/}"  sec:authorize="isAuthenticated()" >Status</a></li>
+				<li><a href="#" th:href="@{/rules}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">List Rule</a></li>
+                <li><a href="#" th:href="@{/records}" sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}" class="active">Traffic Monitoring</a></li>
+                   <li><a href="#" th:href="@{/devices}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'NON_TECH'}">Devices</a></li>
+				<!--  <li><a href="check.html">Check Records</a></li> -->
+				<li><a href="#" th:href="@{/about}">About Us</a></li>
+
+			</ul>
+		</nav>
+		<label for="btn" class="btn">
+			<div></div>
+			<div></div>
+			<div></div>
+
+
+		</label>
+	</header>
+
+
+	<div class="view">
+
+
+
+		<div class="head">On this page, you can monitor network traffic details</div>
+		<!--<div class="find">
+			<input type="search" name="search" id="search" placeholder="Search">
+			<button type="submit" name="submit">search</button>
+			<br>
+			<br>
+		</div>-->
+	</div>
+	<table id="customers">
+		<tr>
+			<th>Index</th>
+			<th>DateTime</th>
+			<th>Protocol</th>
+			<th>Source IP</th>
+			<th>Source Port</th>
+			<th>Target IP</th>
+			<th>Target Port</th>
+			<th>Message</th>
+
+		</tr>
+
+		<tr th:each="record : ${records}">
+			<td th:text="${record.id}"></td>
+			<td th:text="${record.time}"></td>
+			<td th:text="${record.protocol}"></td>
+			<td th:text="${record.sourceIp}"></td>
+			<td th:text="${record.sourcePort}"></td>
+			<td th:text="${record.targetIp}"></td>
+			<td th:text="${record.targetPort}"></td>
+			<td th:text="${record.message}"></td>
+
+		</tr>
+
+	</table>
+
+</body>
+</html>

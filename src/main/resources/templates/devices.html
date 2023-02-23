@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Devices</title>
+    <link rel="stylesheet" href="css/view.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <b>WI-FI TALK</b>
+        </div>
+        
+        <input type="checkbox"  id="btn" hidden>
+        <nav>
+            <!-- display none -->
+            <div class="logo">
+               <b>WI-FI TALK</b>
+            </div> 
+
+            <ul>
+             <li  sec:authorize="isAuthenticated()">
+								<form  action="#" method="POST"
+									th:action="@{/logout}">
+								
+									<button type="submit" name="submit" class="logout">Logout</button>
+								</form>
+							</li>
+                    <li><a href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()" >Sign in</a></li>
+                    <li><a href="#" th:href="@{/}"  sec:authorize="isAuthenticated()">Status</a></li>
+           <li><a href="#" th:href="@{/rules}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">List Rule</a></li>
+                <li><a href="#" th:href="@{/records}" sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">Traffic Monitoring</a></li>
+                   <li><a href="#" th:href="@{/devices}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'NON_TECH'}" class="active">Devices</a></li>
+                <!--  <li><a href="check.html">Check Records</a></li> -->
+                <li><a href="#" th:href="@{/about}" >About Us</a></li>
+            </ul>
+        </nav>
+        <label for="btn" class="btn">
+            <div></div>
+            <div></div>
+            <div></div>
+
+
+        </label>
+        </header>
+
+
+    <div class="view">
+
+   
+
+    <div class="head">
+        Devices List
+    
+		<span> -- Connected Devices: </span> <span th:text="${upCount}">250</span>
+
+
+    </div>
+   
+</div>
+    <table id="customers">
+        <tr>
+            <th>Device#</th>
+            <th>IP</th>
+            <th>Connection Status</th>
+            
+    		<th>Risk Status</th>
+    		<th>Procedure</th>
+
+        </tr>
+
+      <tr th:each="device : ${devices}" th:if="${device.status == 'Connected'}">
+            <td th:text="${device.id}"></td>
+            <td th:text="${device.ip}" ></td>
+            <td th:text="${device.status}" th:style="${device.status == 'Connected' ? 'color:green' : 'color:red'}"></td>
+            <td th:text="${device.danger ? 'DANGEROUS' : 'NORMAL' }" th:style="${device.danger ? 'color:white;background-color:red' : 'color:white;background-color:green'}"></td>
+            <td style="text-align:center;padding:3px">
+      
+                <a href="#" th:href="@{/block/{ip}(ip=${device.ip})}"  onclick="msg('You are almost the block!');" class="blk-btn" th:if="${!device.blocked}">Block</a>
+               <script>
+               function msg(m) {
+              alert(m);
+                     }
+               </script>
+
+                <a href="#" th:href="@{/release/{ip}(ip=${device.ip})}" onclick="ms('You are almost the release!')"; class="rel-btn" th:if="${device.blocked}">Release</a>
+                  <script>
+               function ms(m) {
+              alert(m);
+                     }
+               </script>
+            </td>
+        </tr>

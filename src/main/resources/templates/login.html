@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WI-FI TALK</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="js/eye.js" defer></script>
+</head>
+
+<body>
+
+
+	<header>
+		<div class="logo">
+			<b>WI-FI TALK</b>
+		</div>
+
+		<input type="checkbox" id="btn" hidden>
+		<nav>
+			<!-- display none -->
+			<div class="logo">
+				<b>WI-FI TALK</b>
+			</div>
+
+			<ul>
+				<li sec:authorize="isAuthenticated()">
+					<form action="#" method="POST" th:action="@{/logout}">
+
+						<button type="submit" name="submit" class="logout">Logout</button>
+					</form>
+				</li>
+				<li><a href="#" th:href="@{/login}"
+					sec:authorize="!isAuthenticated()" class="active">Sign in</a></li>
+				<li><a href="#" th:href="@{/rules}"
+					sec:authorize="isAuthenticated()">List Rule</a></li>
+				<li><a href="#" th:href="@{/records}"
+					sec:authorize="isAuthenticated()">View Records</a></li>
+				<li><a href="#" th:href="@{/devices}"
+					sec:authorize="isAuthenticated()">Devices</a></li>
+				<!--  <li><a href="check.html">Check Records</a></li> -->
+				<li><a href="#" th:href="@{/about}">About Us</a></li>
+
+			</ul>
+		</nav>
+		<label for="btn" class="btn">
+			<div></div>
+			<div></div>
+			<div></div>
+
+
+		</label>
+	</header>
+
+
+	<div class="form">
+
+		<form th:action="@{/login}" method="post">
+			<h1>Sign in</h1>
+			<br>
+
+			<div>
+				<label for="text">UserName</label><br> <input type="text"
+					name="username" id="username" autofocus autocomplete="off">
+			</div>
+
+			<div class="pwd">
+				<label for="password">Password</label><br> <input
+					type="password" name="password" id="password"> <img
+					src="images/close.png" alt="eye icon" width="20" id="img"
+					onclick="Show()">
+			</div>
+			<br> <br>
+
+
+
+			<div>
+				<button type="submit" name="submit">Sign in</button>
+			</div>
+
+			<br>
+			
+
+
+		</form>
+	</div>
+
+
+
+</body>
+
+</html>

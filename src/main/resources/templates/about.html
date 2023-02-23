@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="css/about.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <b>WI-FI TALK</b>
+        </div>
+        
+        <input type="checkbox"  id="btn" hidden>
+        <nav>
+            <!-- display none -->
+            <div class="logo">
+               <b>WI-FI TALK</b>
+            </div> 
+
+            <ul>
+             <li  sec:authorize="isAuthenticated()">
+								<form  action="#" method="POST"
+									th:action="@{/logout}">
+								
+									<button type="submit" name="submit" class="logout">Logout</button>
+								</form>
+							</li>
+                  <li><a href="#" th:href="@{/login}" sec:authorize="!isAuthenticated()" >Sign in</a></li>
+                  <li><a href="#" th:href="@{/}"  sec:authorize="isAuthenticated()">Status</a></li>
+                <li><a href="#" th:href="@{/rules}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">List Rule</a></li>
+                <li><a href="#" th:href="@{/records}" sec:authorize="isAuthenticated()" th:if="${usrType == 'TECH'}">Traffic Monitoring</a></li>
+                   <li><a href="#" th:href="@{/devices}"  sec:authorize="isAuthenticated()" th:if="${usrType == 'NON_TECH'}">Devices</a></li>
+                <!--  <li><a href="check.html">Check Records</a></li> -->
+                <li><a href="#" th:href="@{/about}" class="active">About Us</a></li>
+               
+            </ul>
+        </nav>
+        <label for="btn" class="btn">
+            <div></div>
+            <div></div>
+            <div></div>
+
+
+        </label>
+        </header>
+
+
+
+        <div class="form">
+
+       
+           
+            <div class="content">
+                    <h1>About us?</h1> 
+                <p>We are a group students at King Saud 
+                    .University, majoring in computer networks
+                    Hadeel Al-Shaalan, Norah Al Mujri, Shatha 
+                    Al-Maliki, Ashwaq Al-Otaibi, Sarah alonazi 
+                    We have developed, and designed 
+                    interfaces linked to the snort to monitor the 
+                    network and protect it from suspicious 
+                    communication. Our project targets 
+                    accessible public networks so that they are 
+                    exposed to hacking and are not 
+                    sufficiently secure.</p>
+
+                </div>
+                
+                
+            </div>
+            <br>
+         
+            
+           
+            
+
+
+
+</body>
+</html>

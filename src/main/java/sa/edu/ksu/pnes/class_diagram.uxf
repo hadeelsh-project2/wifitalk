@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>250</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>SnortRule
+--
+-id: String
+-desc: String
+-code: String
+--
++SnortRule(rule : String) 
+
++setId(id: String) : void
++getId(): String
++setDesc(desc: String) : void
++getDesc(): String
++setCode(code: String) : void
++getCode()  : String
+--
+Responsibilities
+*-- The snort rule model*
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>410</x>
+      <y>10</y>
+      <w>350</w>
+      <h>500</h>
+    </coordinates>
+    <panel_attributes>SnortLogMessage
+--
+-id: String
+-message: String
+-protocol: String
+-sourceIp: String
+-sourcePort: String
+-targetIp: String
+-targetPort: String
+-time: String
+--
+SnortLogMessage(log: String, id: int)
++setId(id: String) : void
++getId(): String
++setMessage(message: String) : void
++getMessage(): String
++setProtocol(protocol: String) : void
++getProtocol(): String
++setSourceIp(ip : String) : void
++getSourceIp() : String
++setSourcePort(port: String) : void
++getSourcePort(): String
++setTargetIp(ip: String) : void
++getTargetIP(): String
++setTargetPort(ip : String) : void
++getTargetPort() : String
++setTime(time: String) : void
++getTime() : String
+--
+Responsibilities
+*-- The snort output message model*
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>340</y>
+      <w>310</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>NetworkDevice
+--
+-id: String
+-ip: String
+-status: String
+-danger: boolean
+-blocked: boolean
+--
++setId(id: String) : void
++getId(): String
++setIp(ip: String) : void
++getIp(): String
++setStatus(status: String) : void
++getStatus()  : String
++setDanger(danger: boolean)
++isDanger() : boolean
++setBlocked(blocked: boolean)
++isBlocked() : boolean
+
+--
+Responsibilities
+*-- a connected device in the network *
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>360</x>
+      <y>540</y>
+      <w>400</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>LogFilesReader
+--
+--
++getLog(file: String): List&lt;SnortLogMessage&gt;
++readRules(file: String) : List&lt;SnortRule&gt;
+--
+Responsibilities
+*-- reads all the snort log and snort rules *
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>20</x>
+      <y>700</y>
+      <w>400</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>NetworkScanner
+--
+-allDevices: List&lt;NetworkDevice&gt;
+--
++getAllDevices() : List&lt;NetworkDevice&gt;
++startProcess(): void
++shutdownProcess(): void
+--
+Responsibilities
+*-- deteremines network devices connectivity*
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>700</y>
+      <w>400</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>CommandRunner
+--
+--
++shutDown(Process) : List&lt;NetworkDevice&gt;
++startCommand(command: String, options: String, logFile: String): void
+--
+Responsibilities
+*-- starts and stops snort process*
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

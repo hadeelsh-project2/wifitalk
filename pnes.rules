@@ -1,0 +1,14 @@
+alert icmp any any -> $HOME_NET any (msg:"'icmp traffic|incomming pinging via icmp|non danger'";sid:1000001;rev:1;)
+alert icmp $HOME_NET any -> any any (msg:"'icmp traffic|outgoing pinging via icmp|non danger'";sid:1000002;rev:1;)
+alert tcp any any -> $HOME_NET any (msg:"'tcp traffic|incomming tcp|non danger'";sid:1000003;rev:1;)
+alert tcp $HOME_NET any -> any any (msg:"'tcp traffic|outgoing tcp|non danger'";sid:1000004;rev:1;)
+alert udp any any -> $HOME_NET any (msg:"'udp traffic|incomming udp|non danger'";sid:1000005;rev:1;)
+alert udp $HOME_NET any -> any any (msg:"'udp traffic|outgoing udp|non danger'";sid:1000006;rev:1;)
+
+alert tcp any any -> $HOME_NET any (flags:S;msg:"'dos|incomming icmp dos|danger'";threshold:type both,track by_dst,count 50,seconds 3;sid:1000007;rev:1;)
+alert tcp $HOME_NET any -> any any (flags:S;msg:"'dos|outgoing icmp dos|danger'";threshold:type both,track by_dst,count 50,seconds 3;sid:1000008;rev:1;)
+
+alert icmp any any -> $HOME_NET any (msg:"'network scanning|icmp network scanning|danger'";threshold:type both,track by_src,count 50,seconds 60;sid:1000009;rev:1;)
+
+alert tcp any any -> $HOME_NET any (msg:"'port scanning|tcp port scanning|danger'";threshold:type both,track by_dst,count 50,seconds 60;sid:10000010;rev:1;)
+alert udp any any -> $HOME_NET any (msg:"'port scanning|udp port scanning|danger'";threshold:type both,track by_dst,count 50,seconds 60;sid:10000011;rev:1;)
